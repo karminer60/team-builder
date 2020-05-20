@@ -1,8 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Teammate from './teammate'
-import TeammateForm from './teammateForm'
+
 
 function App() {
   return (
