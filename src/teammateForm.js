@@ -20,7 +20,7 @@ export default function TeammateForm(props) {
         <h4>General information</h4>
 
         <label>Username:&nbsp;
-     
+          <input
             type='text'
             placeholder='Type a username'
             maxLength='20'
