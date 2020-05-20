@@ -6,53 +6,73 @@ import TeammateForm from './teammateForm'
 
 
 const initialTeam = [
-    {
-      id: uuid(),
-      username: 'Michael',
-      email: 'michael@michael.com',
-      role: 'Student',
-    },
-  ]
+  {
+    id: uuid(),
+    username: 'Karina',
+    email: 'karina@karina.com',
+    role: 'Student',
+  },
+]
 
-  const initialFormValues = {
-   
-    username: '',
-    email: '',
-   
-    role: '',
+const initialFormValues = {
+
+  username: '',
+  email: '',
+
+  role: '',
+}
+
+export default function Team() {
+  const [team, setTeam] = useState(initialTeam)
+
+  const [formValues, setFormValues] = useState(initialFormValues)
+
+  const onInputChange = evt => {
+
+    const { name } = evt.target
+
+    const { value } = evt.target
+
+    setFormValues({ ...formValues, [name]: value })
   }
-  
-  export default function Team() {
-    const [team, setTeam] = useState(initialTeam)
 
-    const [formValues, setFormValues] = useState(initialFormValues)
-  
-    const onInputChange = evt => {
 
-      debugger
-     
+
+  const onSubmit = evt => {
+    evt.preventDefault()
+
+    if (
+      !formValues.username.trim() ||
+      !formValues.email.trim() ||
+      !formValues.role.trim()
+    ) {
+      return
     }
+    const newTeam = { ...formValues, id: uuid() }
+    
+    setTeam([ newTeam, ...team ])
+
+    setFormValues(initialFormValues)
   
-    const onSubmit = evt => {
-    }
-  
-    return (
-      <div className='container'>
-        <header><h1>Teammate App</h1></header>
-  
-        <TeammateForm
-          values={formValues}
-          onInputChange={onInputChange}
-          onSubmit={onSubmit}
-        />
-  
-        {
-          team.map(person => {
-            return (
-              <Teammate key={person.id} details={person} />
-            )
-          })
-        }
-      </div>
-    )
-  }
+  };
+
+  return (
+    <div className='container'>
+      <header><h1>Teammate App</h1></header>
+
+      <TeammateForm
+        values={formValues}
+        onInputChange={onInputChange}
+        onSubmit={onSubmit}
+      />
+
+      {
+        team.map(person => {
+          return (
+            <Teammate key={person.id} details={person} />
+          )
+        })
+      }
+    </div>
+  )
+}

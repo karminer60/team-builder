@@ -25,7 +25,7 @@ export default function TeammateForm(props) {
           <input
             type='text'
             placeholder='Type a username'
-            maxLength='20'
+            maxLength='100'
             name='username'
            
             value={values.username}
